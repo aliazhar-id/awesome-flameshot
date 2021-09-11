@@ -4,24 +4,26 @@
 
 _SCREENSHOT_DIR_=$HOME/Pictures/Flameshot
 _RAW_=$(date '+Screenshot_%y_%m_%d_%H_%M_%S.png')
+# _RESDIR_="Result"
 _LOG_FILE_="$_SCREENSHOT_DIR_/.awesome-flameshot.log"
 
-_FG_COLOR_='#C1C1C1'
-_BG_COLOR_='#ffffff'
-_BG_SIZE_=5
+
+_FG_COLOR_='#ffffff'
+_BG_COLOR_='lightgray'
+_BG_SIZE_=3
 
 # Border Size Applied when value greater than or equal 3
 _BORDER_SIZE_=3
-_SHADOW_SIZE_='50x10+0+10'  # [ weight ] x [ radius ] + [ horizontal ] x [ vertical ]
+_SHADOW_SIZE_='90x10+0+10'  # [ weight ] x [ radius ] + [ horizontal ] x [ vertical ]
 _ROUNDED_CORNER_=7
 
-_AUTHOR_POST_=( 'South' '+0+26' )
-_AUTHOR_NAME_="  $USER  $(date '+    %d.%m.%y     %H:%M')"
+_AUTHOR_POST_=( 'South' '+0+20' )
+_AUTHOR_NAME_="  $USER  $(date '+   %d.%m.%y     %H:%M')"
 _AUTHOR_COLOR_='#000000'
 
 # Get Lists Font With "convert -list font | grep -iE 'font:.*' | nl"
-_FONT_SIZE_=9
-_FONT_='JetBrains-Mono-Medium-Nerd-Font-Complete-Mono'
+_FONT_SIZE_=12
+_FONT_='JetBrains-Mono-Medium-Medium-Nerd-Font-Complete'
 
 # =============================================
 
@@ -125,6 +127,7 @@ function convert() {
     printf "%-50s" "**|--[+]*Set*sRGB*Image*Profile*" | sed 's/ /./g' | sed 's/*/ /g'
     magick convert "$_target_file_" -profile /usr/share/color/icc/colord/sRGB.icc "$_target_file_" >> $_LOG_FILE_ 2>&1
     check
+
 }
 
 function summary() {
@@ -171,9 +174,13 @@ function main() {
     echo -e "\n\n${Light_Cyan} [+] CONVERTING ${NoColor}"
     convert
 
+
     echo -e "\n\n${Light_Cyan} [+] SUMMARY ${NoColor}"
     _end_job_=$(date +%s)
     summary $_start_job_ $_end_job_
+
+    # mkdir --parents $_SCREENSHOT_DIR_/$_RESDIR_/; mv $_target_file_ $_
+    
 }
 
 clear
