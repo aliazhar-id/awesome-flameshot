@@ -5,6 +5,7 @@
 _SCREENSHOT_DIR_=$HOME/Pictures/Flameshot
 _RAW_=$(date '+Screenshot_%y_%m_%d_%H_%M_%S.png')
 _RESDIR_="Result"
+_RAWIMG_="$_SCREENSHOT_DIR_/$_RAW_"
 _LOG_FILE_="$_SCREENSHOT_DIR_/.awesome-flameshot.log"
 
 
@@ -41,6 +42,9 @@ NoColor="\033[0m"
 function check() {
 
     if ! [[ $? -eq 0 && ${PIPESTATUS[0]} -eq 0 ]]; then
+
+        rm $_RAWIMG_
+
         notify-send -u critical -t 3000 "[ ERROR ]  Awesome-Flameshot : $_LOG_FILE_" >> $_LOG_FILE_ 2>&1
         exit 1
     fi
@@ -130,7 +134,6 @@ function main() {
 
     summary
 
-    # mkdir --parents $_SCREENSHOT_DIR_/$_RESDIR_/; mv $_target_file_ $_
 }
 
 clear
