@@ -4,8 +4,8 @@
 
 _SCREENSHOT_DIR_=$HOME/Pictures/Flameshot
 _RAW_=$(date '+Screenshot_%y_%m_%d_%H_%M_%S.png')
-_RESDIR_="Result"
 _RAWIMG_="$_SCREENSHOT_DIR_/$_RAW_"
+_RAWDIR_="$_SCREENSHOT_DIR_/RAW"
 _LOG_FILE_="$_SCREENSHOT_DIR_/.awesome-flameshot.log"
 
 
@@ -119,6 +119,7 @@ function summary() {
 
     xclip -selection clipboard -t image/png -i $_target_file_ >> $_LOG_FILE_ 2>&1 && notify-send -u normal -t 3000 "Awesome-Flameshot: $_target_file_ Copied" >> $_LOG_FILE_ 2>&1
 
+    mkdir --parents $_RAWDIR_; mv $_RAWIMG_ $_
 }
 
 function main() {
